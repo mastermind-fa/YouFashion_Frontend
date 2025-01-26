@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouFashion</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-lg">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <a href="#" class="flex items-center">
+          <span class="font-semibold text-gray-700 text-2xl">YouFashion</span>
+        </a>
+
+        <!-- Nav Links -->
+        <div class="hidden md:flex items-center space-x-4">
+          <a href="index.html" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Home</a>
+          <a href="cart.html" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Cart</a>
+          <a href="wishlist.html" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Wishlist</a>
+        </div>
+
+        <!-- Authenticated/Unauthenticated Links -->
+        <div class="hidden md:flex items-center space-x-4">
+          <div id="authenticated" class="hidden">
+            <a href="profile.html" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Profile</a>
+            <button onclick="handleLogout()" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Logout</button>
+          </div>
+          <div id="unauthenticated" class="hidden flex space-x-4">
+            <a href="login.html" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Login</a>
+            <a href="registration.html" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Register</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Full-Screen Bootstrap Carousel -->
+  <section class="hero-section">
+    <!-- Bootstrap Carousel -->
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <img src="images/hero1.jpg" class="d-block w-100 h-screen object-cover" alt="Slide 1">
+          <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50 p-6 rounded-lg">
+            <h1 class="text-5xl font-bold mb-4 text-white">Welcome to YouFashion</h1>
+            <p class="text-xl text-white">Discover the latest trends in fashion and style.</p>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <img src="images/hero2.jpg" class="d-block w-100 h-screen object-cover" alt="Slide 2">
+          <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50 p-6 rounded-lg">
+            <h1 class="text-5xl font-bold mb-4 text-white">Exclusive Collections</h1>
+            <p class="text-xl text-white">Shop our exclusive collections and stand out.</p>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+          <img src="images/hero3.jpg" class="d-block w-100 h-screen object-cover" alt="Slide 3">
+          <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50 p-6 rounded-lg">
+            <h1 class="text-5xl font-bold mb-4 text-white">Summer Sale</h1>
+            <p class="text-xl text-white">Get up to 50% off on selected items.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carousel Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Product Listing Section -->
+  <section id="products" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8">Featured Products</h2>
+    <!-- Filter and Sort Options -->
+    <div class="flex flex-wrap gap-4 mb-8">
+      <!-- Size Filter -->
+      <select id="filter-size" class="p-2 border rounded-lg">
+        <option value="">Filter by Size</option>
+        <option value="S">Small</option>
+        <option value="M">Medium</option>
+        <option value="L">Large</option>
+        <option value="XL">Extra Large</option>
+      </select>
+  
+      <!-- Color Filter -->
+      <select id="filter-color" class="p-2 border rounded-lg">
+        <option value="">Filter by Color</option>
+        <option value="Red">Red</option>
+        <option value="Blue">Blue</option>
+        <option value="Green">Green</option>
+        <option value="Yellow">Yellow</option>
+        <option value="Black">Black</option>
+        <option value="White">White</option>
+        <option value="Pink">Pink</option>
+        <option value="Purple">Purple</option>
+        <option value="Orange">Orange</option>
+        <option value="Grey">Grey</option>
+        <option value="Brown">Brown</option>
+        <option value="Gold">Gold</option>
+        <option value="Silver">Silver</option>
+        <option value="Copper">Copper</option>
+        <option value="Rainbow">Rainbow</option>
+        <option value="Transparent">Transparent</option>
+        <option value="Multi-Color">Multi-Color</option>
+      </select>
+  
+      <!-- Sort Options -->
+      <select id="sort-by" class="p-2 border rounded-lg">
+        <option value="">Sort by</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="popularity-asc">Popularity: Low to High</option>
+        <option value="popularity-desc">Popularity: High to Low</option>
+      </select>
+    </div>
+  
+    <!-- Product List -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="product-list">
+      <!-- Product cards will be dynamically inserted here -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p>&copy; 2025 YouFashion. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JavaScript -->
+  <script src="auth.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

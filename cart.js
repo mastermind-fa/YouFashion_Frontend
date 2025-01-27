@@ -1,6 +1,6 @@
 // Fetch cart products from the backend
 async function fetchCartProducts() {
-    const response = await fetch('https://you-fashion-backend.vercel.app/order/cart/', {
+    const response = await fetch('https://youfashion-backend.onrender.com/order/cart/', {
       method: 'GET',
       headers: {
         'Authorization': `Token ${localStorage.getItem('token')}`,
@@ -23,7 +23,7 @@ async function fetchCartProducts() {
     products.forEach(product => {
       const productCard = `
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-          <img src="https://you-fashion-backend.vercel.app/${product.product.image}" alt="${product.product.name}" class="w-full h-48 object-cover">
+          <img src="https://youfashion-backend.onrender.com/${product.product.image}" alt="${product.product.name}" class="w-full h-48 object-cover">
           <div class="p-4">
             <h3 class="text-xl font-semibold text-gray-800 mb-2">${product.product.name}</h3>
             <p class="text-gray-600 mb-2">${product.product.description.slice(0,60)}</p>
@@ -31,7 +31,7 @@ async function fetchCartProducts() {
             <p class="text-gray-600 mb-2"><strong>Color:</strong> ${product.product.color}</p>
             <p class="text-gray-600 mb-2"><strong>Size:</strong> ${product.product.size}</p>
             <p class="text-gray-600 mb-2"><strong>Quantity:</strong> ${product.quantity}</p>
-            <button onclick="removeFromCart('${product.id}')"
+            <button onclick="removeFromCart('${product.product.id}')"
               class="bg-red-500 text-white py-2 px-4 rounded-full hover:bg-red-600 transition duration-300 w-full">
               Remove from Cart
             </button>
@@ -53,7 +53,7 @@ async function fetchCartProducts() {
     console.log(orderId);
     
 
-    const response = await fetch(`https://you-fashion-backend.vercel.app/order/cart/${orderId}/`, {
+    const response = await fetch(`https://youfashion-backend.onrender.com/order/cart/${orderId}/`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Token ${localStorage.getItem('token')}`,
@@ -75,7 +75,7 @@ async function fetchCartProducts() {
       return;
     }
 
-    const response = await fetch('https://you-fashion-backend.vercel.app/order/checkout/', {
+    const response = await fetch('https://youfashion-backend.onrender.com/order/checkout/', {
       method: 'POST',
       headers: {
         'Authorization': `Token ${localStorage.getItem('token')}`,

@@ -2,7 +2,7 @@
 async function fetchProductDetails(productId) {
   try {
     const response = await fetch(
-      `https://youfashion-backend.onrender.com/products/list/${productId}/`
+      `https://you-fashion-backend.vercel.app/products/list/${productId}/`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch product details");
@@ -19,7 +19,7 @@ async function fetchProductDetails(productId) {
 async function fetchReviews(productId) {
   try {
     const response = await fetch(
-      `https://youfashion-backend.onrender.com/products/reviews/list/?product=${productId}`
+      `https://you-fashion-backend.vercel.app/products/reviews/list/?product=${productId}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");
@@ -125,7 +125,7 @@ async function submitReview(event) {
     };
     console.log(sendData);
     const response = await fetch(
-      `https://youfashion-backend.onrender.com/products/reviews/`,
+      `https://you-fashion-backend.vercel.app/products/reviews/`,
       {
         method: "POST",
         headers: {
@@ -161,7 +161,7 @@ async function addToCart() {
   console.log(sendData);
 
   try {
-    const response = await fetch("https://youfashion-backend.onrender.com/order/cart/", {
+    const response = await fetch("https://you-fashion-backend.vercel.app/order/cart/", {
       method: "POST",
       headers: {
         "Authorization": `Token ${localStorage.getItem("token")}`,

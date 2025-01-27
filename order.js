@@ -1,7 +1,7 @@
 // Fetch and display orders
 async function fetchOrders() {
     try {
-      const response = await fetch('https://youfashion-backend.onrender.com/order/orders/', {
+      const response = await fetch('https://you-fashion-backend.vercel.app/order/orders/', {
         method: 'GET',
         headers: {
           'Authorization': `Token ${localStorage.getItem('token')}`,
@@ -49,7 +49,7 @@ function renderOrders(orders) {
         <div class="bg-white shadow-lg rounded-lg p-6">
           <h3 class="text-xl font-semibold text-gray-800 mb-2">Order ID: ${order.id}</h3>
           <div class="flex items-center space-x-4 mb-4">
-            <img src="https://youfashion-backend.onrender.com/${order.product.image}" alt="${order.product.name}" class="w-24 h-24 object-cover rounded-lg">
+            <img src="https://you-fashion-backend.vercel.app/${order.product.image}" alt="${order.product.name}" class="w-24 h-24 object-cover rounded-lg">
             <div>
               <p class="text-gray-600"><strong>Product:</strong> ${order.product.name}</p>
               <p class="text-gray-600"><strong>Quantity:</strong> ${order.quantity}</p>

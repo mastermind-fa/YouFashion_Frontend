@@ -8,7 +8,7 @@ async function fetchProfile() {
     }
   
     try {
-      const response = await fetch(`https://youfashion-backend.onrender.com/customer/details/${userId}/`, {
+      const response = await fetch(`https://you-fashion-backend.vercel.app/customer/details/${userId}/`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,

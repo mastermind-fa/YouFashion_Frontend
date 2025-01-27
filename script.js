@@ -1,7 +1,7 @@
 // Function to fetch products from the API
 async function fetchProducts(color = "", size = "", sortBy = "") {
   try {
-    let url = "https://youfashion-backend.onrender.com/products/list/";
+    let url = "https://you-fashion-backend.vercel.app/products/list/";
     const params = new URLSearchParams();
 
     if (color) {
@@ -139,7 +139,7 @@ document
 //   try {
 //     console.log("Fetching user ID...");
 //     const response = await fetch(
-//       "https://youfashion-backend.onrender.com/customer/api/user-id/",
+//       "https://you-fashion-backend.vercel.app/customer/api/user-id/",
 //       {
 //         headers: {
 //           Authorization: `Bearer ${token}`,

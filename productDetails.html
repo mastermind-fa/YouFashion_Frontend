@@ -141,7 +141,7 @@
     
     async function addToWishlist(productId) {
       try {
-        const response = await fetch("https://youfashion-backend.onrender.com/products/wishlist/", {
+        const response = await fetch("https://you-fashion-backend.vercel.app/products/wishlist/", {
           method: "POST",
           headers: {
             "Authorization": `Token ${localStorage.getItem("token")}`,

@@ -35,7 +35,7 @@ async function handleRegistration(event) {
     }
   
     try {
-      const response = await fetch("https://youfashion-backend.onrender.com/customer/register/", {
+      const response = await fetch("https://you-fashion-backend.vercel.app/customer/register/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ async function handleRegistration(event) {
     const password = document.getElementById("password").value;
 
     try {
-        const response = await fetch("https://youfashion-backend.onrender.com/customer/login/", {
+        const response = await fetch("https://you-fashion-backend.vercel.app/customer/login/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

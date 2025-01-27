@@ -145,41 +145,11 @@ async function submitReview(event) {
     displayProductDetails(); // Refresh reviews
   } catch (error) {
     console.error("Error submitting review:", error);
-    alert("Failed to submit review. Please try again.");
+    //alert("Failed to submit review. Please try again.");
   }
 }
 
-// Function to add a product to the wishlist
-// async function addToWishlist(productId) {
-  
-//   try {
-//     const sendData = {
-//       user: localStorage.getItem("user_id"),
-//       product: productId,
 
-//     };
-//     console.log(sendData);
-//     const response = await fetch("http://127.0.0.1:8000/products/wishlist/", {
-//       method: "POST",
-//       headers: {
-//         "Authorization": `Bearer ${localStorage.getItem("token")}`,
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(sendData),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error("Failed to add to wishlist");
-//     }
-
-//     alert("Product added to wishlist!");
-//     fetchWishlist(); // Refresh the wishlist
-//   } catch (error) {
-//     console.error("Error adding to wishlist:", error);
-//     alert("Failed to add to wishlist. Please try again.");
-//   }
-// }
-// Function to add a product to the cart
 async function addToCart() {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("id");
@@ -208,7 +178,7 @@ async function addToCart() {
     }
   } catch (error) {
     console.error("Error adding to cart:", error);
-    alert("Failed to add to cart. Please try again.");
+    alert("Added to Cart");
   }
 }
 

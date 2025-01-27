@@ -48,7 +48,7 @@
       <div class="carousel-inner">
         <!-- Slide 1 -->
         <div class="carousel-item active">
-          <img src="images/hero1.jpg" class="d-block w-100 h-screen object-cover" alt="Slide 1">
+          <img src="images/image.jpg" class="d-block w-100 h-screen object-cover" alt="Slide 1">
           <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50 p-6 rounded-lg">
             <h1 class="text-5xl font-bold mb-4 text-white">Welcome to YouFashion</h1>
             <p class="text-xl text-white">Discover the latest trends in fashion and style.</p>
@@ -57,7 +57,7 @@
 
         <!-- Slide 2 -->
         <div class="carousel-item">
-          <img src="images/hero2.jpg" class="d-block w-100 h-screen object-cover" alt="Slide 2">
+          <img src="images/image2.jpg" class="d-block w-100 h-screen object-cover" alt="Slide 2">
           <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50 p-6 rounded-lg">
             <h1 class="text-5xl font-bold mb-4 text-white">Exclusive Collections</h1>
             <p class="text-xl text-white">Shop our exclusive collections and stand out.</p>
@@ -150,5 +150,38 @@
   <!-- JavaScript -->
   <script src="auth.js"></script>
   <script src="script.js"></script>
+  <script>
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+    const sendData = { product: productId, user: localStorage.getItem('user_id') };
+    console.log(sendData);
+    
+    async function addToWishlist(productId) {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/products/wishlist/", {
+          method: "POST",
+          headers: {
+            "Authorization": `Token ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(sendData),
+        });
+    
+        if (!response.ok) {
+          throw new Error("Failed to add to wishlist");
+        }
+    
+        alert("Product added to wishlist!");
+        fetchWishlist(); 
+      } catch (error) {
+        console.error("Error adding to wishlist:", error);
+        //alert("Failed to add to wishlist. Please try again.");
+      }
+    }
+
+    
+    
+  </script>
 </body>
 </html>

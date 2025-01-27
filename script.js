@@ -52,7 +52,7 @@ async function renderProducts(products) {
           <h3 class="text-xl font-semibold text-gray-800 mb-2">${
             product.name
           }</h3>
-          <p class="text-gray-600">${product.description}</p>
+          <p class="text-gray-600">${product.description.slice(0,40)}</p>
           <p class="text-purple-500 font-semibold mt-4">$${product.price}</p>
           <button onclick="showProductDetails(${
             product.id

@@ -26,7 +26,7 @@ async function fetchCartProducts() {
           <img src="http://127.0.0.1:8000/${product.product.image}" alt="${product.product.name}" class="w-full h-48 object-cover">
           <div class="p-4">
             <h3 class="text-xl font-semibold text-gray-800 mb-2">${product.product.name}</h3>
-            <p class="text-gray-600 mb-2">${product.product.description}</p>
+            <p class="text-gray-600 mb-2">${product.product.description.slice(0,60)}</p>
             <p class="text-purple-500 font-semibold mb-2">$${product.product.price}</p>
             <p class="text-gray-600 mb-2"><strong>Color:</strong> ${product.product.color}</p>
             <p class="text-gray-600 mb-2"><strong>Size:</strong> ${product.product.size}</p>

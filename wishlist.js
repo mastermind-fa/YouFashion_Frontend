@@ -2,7 +2,7 @@
 async function fetchWishlist() {
   // const userID = localStorage.getItem("user_id");
   try {
-    const response = await fetch("http://127.0.0.1:8000/products/wishlist/", {
+    const response = await fetch("https://youfashion-backend.onrender.com/products/wishlist/", {
       method: "GET",
       headers: {
         "Authorization": `Token ${localStorage.getItem("token")}`,
@@ -53,7 +53,7 @@ console.log(wishlist);
   wishlist.forEach((item) => {
     const productCard = `
       <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-        <img src="http://127.0.0.1:8000${item.product.image}" alt="${item.product.name}" class="w-full h-48 object-cover">
+        <img src="https://youfashion-backend.onrender.com${item.product.image}" alt="${item.product.name}" class="w-full h-48 object-cover">
         <div class="p-6">
           <h3 class="text-xl font-semibold text-gray-800 mb-2">${item.product.name}</h3>
           <p class="text-gray-600">${item.product.description}</p>
@@ -70,7 +70,7 @@ console.log(wishlist);
 // Function to add a product to the cart
 async function addToCart(productId) {
   try {
-    const response = await fetch("http://127.0.0.1:8000/products/cart/", {
+    const response = await fetch("https://youfashion-backend.onrender.com/products/cart/", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -93,7 +93,7 @@ async function addToCart(productId) {
 // Function to remove a product from the wishlist
 async function removeFromWishlist(productId) {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/products/wishlist/remove/${productId}/`, {
+    const response = await fetch(`https://youfashion-backend.onrender.com/products/wishlist/remove/${productId}/`, {
       method: "DELETE",
       headers: {
         "Authorization": `Token ${localStorage.getItem("token")}`,

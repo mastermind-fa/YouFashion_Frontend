@@ -8,7 +8,7 @@ async function fetchProfile() {
     }
   
     try {
-      const response = await fetch(`http://127.0.0.1:8000/customer/details/${userId}/`, {
+      const response = await fetch(`https://youfashion-backend.onrender.com/customer/details/${userId}/`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,

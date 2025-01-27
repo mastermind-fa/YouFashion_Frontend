@@ -1,7 +1,7 @@
 // Function to fetch products from the API
 async function fetchProducts(color = "", size = "", sortBy = "") {
   try {
-    let url = "http://127.0.0.1:8000/products/list/";
+    let url = "https://youfashion-backend.onrender.com/products/list/";
     const params = new URLSearchParams();
 
     if (color) {
@@ -139,7 +139,7 @@ document
 //   try {
 //     console.log("Fetching user ID...");
 //     const response = await fetch(
-//       "http://127.0.0.1:8000/customer/api/user-id/",
+//       "https://youfashion-backend.onrender.com/customer/api/user-id/",
 //       {
 //         headers: {
 //           Authorization: `Bearer ${token}`,

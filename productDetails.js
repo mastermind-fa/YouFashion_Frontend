@@ -15,6 +15,58 @@ async function fetchProductDetails(productId) {
   }
 }
 
+// Function to display product details
+async function displayProductDetails() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get("id");
+
+  if (productId) {
+    const product = await fetchProductDetails(productId);
+    if (product) {
+      // Populate main product image
+      const mainImage = document.getElementById("product-img");
+      mainImage.src = product.image;
+
+      // Populate breadcrumb
+      const category = document.getElementById("product-category");
+      category.innerHTML = `${product.name}`;
+
+      // Populate product name
+      const productName = document.getElementById("product-name");
+      productName.textContent = product.name;
+
+      // Populate product price
+      const productPrice = document.getElementById("product-price");
+      productPrice.textContent = `$${product.price}`;
+
+      // Populate product description
+      const productDescription = document.getElementById("product-description");
+      if (product.description) {
+        productDescription.innerHTML = `${product.description}`;
+      } else {
+        productDescription.textContent = "No description available.";
+      }
+
+      // Add event listener for "Add to Cart" button
+      const addToCartButton = document.getElementById("add-to-cart");
+      if (addToCartButton) {
+        addToCartButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          addToCart();
+        });
+      }
+
+      // Fetch and display reviews
+      const reviews = await fetchReviews(productId);
+      displayReviews(reviews);
+    } else {
+      alert("Product not found!");
+    }
+  } else {
+    alert("Invalid product ID!");
+  }
+}
+
 // Function to fetch reviews for a product
 async function fetchReviews(productId) {
   try {
@@ -31,45 +83,6 @@ async function fetchReviews(productId) {
     return [];
   }
 }
-
-// Function to display product details and reviews
-async function displayProductDetails() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const productId = urlParams.get("id");
-  // console.log(productId);
-
-  if (productId) {
-    const product = await fetchProductDetails(productId);
-    if (product) {
-      // Populate product details
-      document.getElementById("product-image").src = product.image;
-      document.getElementById("product-name").textContent = product.name;
-      document.getElementById("product-description").textContent =
-        product.description;
-      document.getElementById(
-        "product-price"
-      ).textContent = `$${product.price}`;
-      document.getElementById("color-value").textContent = product.color;
-      document.getElementById("size-value").textContent = product.size;
-      document.getElementById("popularity-value").textContent =
-        product.popularity;
-
-      // Fetch and display reviews
-      const reviews = await fetchReviews(productId);
-      displayReviews(reviews);
-
-      // Calculate and display average rating
-      const averageRating = calculateAverageRating(reviews);
-      document.getElementById("rating-value").textContent =
-        averageRating.toFixed(1);
-    } else {
-      alert("Product not found!");
-    }
-  } else {
-    alert("Invalid product ID!");
-  }
-}
-
 
 // Function to display reviews
 function displayReviews(reviews) {
@@ -98,16 +111,15 @@ function displayReviews(reviews) {
   });
 }
 
-// Function to calculate average rating
-function calculateAverageRating(reviews) {
-  if (reviews.length === 0) return 0;
-  const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-  return totalRating / reviews.length;
-}
-
 // Function to submit a review
 async function submitReview(event) {
   event.preventDefault();
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("You must be logged in to submit a review.");
+    window.location.href = "login.html"; // Redirect to the login page
+    return;
+  }
 
   const rating = document.getElementById("rating").value;
   const comment = document.getElementById("comment").value;
@@ -121,18 +133,18 @@ async function submitReview(event) {
       comment: comment,
       user: localStorage.getItem("user_id"),
       product: productId,
-
     };
     console.log(sendData);
+
     const response = await fetch(
       `https://you-fashion-backend.vercel.app/products/reviews/`,
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(sendData), // Only send rating and comment
+        body: JSON.stringify(sendData),
       }
     );
 
@@ -145,26 +157,34 @@ async function submitReview(event) {
     displayProductDetails(); // Refresh reviews
   } catch (error) {
     console.error("Error submitting review:", error);
-    //alert("Failed to submit review. Please try again.");
+    alert("Failed to submit review. Please try again.");
   }
 }
 
-
+// Function to add product to cart
 async function addToCart() {
+  console.log("addToCart called"); // Debugging
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("id");
   const quantity = document.getElementById("quantity").value;
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    alert("You must be logged in to add items to your cart.");
+    window.location.href = "login.html";
+    return;
+  }
+
   const sendData = {
     product_id: productId,
     quantity: quantity,
-  }
-  console.log(sendData);
+  };
 
   try {
     const response = await fetch("https://you-fashion-backend.vercel.app/order/cart/", {
       method: "POST",
       headers: {
-        "Authorization": `Token ${localStorage.getItem("token")}`,
+        "Authorization": `Token ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(sendData),
@@ -182,26 +202,56 @@ async function addToCart() {
   }
 }
 
+// Function to add product to wishlist
+async function addToWishlist() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get("id");
+  const token = localStorage.getItem("token");
+  const sendData = { product: productId, user: localStorage.getItem('user_id') };
+
+  if (!token) {
+    alert("You must be logged in to add items to your wishlist.");
+    window.location.href = "login.html";
+    return;
+  }
+
+  try {
+    const response = await fetch("https://you-fashion-backend.vercel.app/products/wishlist/", {
+      method: "POST",
+      headers: {
+        "Authorization": `Token ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(sendData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Backend Error:", errorData); // Log backend error
+      throw new Error(errorData.error || "Failed to add to wishlist");
+    }
+
+    alert("Product added to wishlist!");
+  } catch (error) {
+    console.error("Fetch Error:", error); // Log fetch error
+    alert(error.message || "Failed to add to wishlist.");
+  }
+}
+
 // Initialize
 document.addEventListener("DOMContentLoaded", () => {
   displayProductDetails();
   checkAuthState();
 
-  // Add event listener for review form
-  const reviewForm = document.getElementById("review-form");
-  if (reviewForm) {
-    reviewForm.addEventListener("submit", submitReview);
+  
+  const wishlistButton = document.getElementById("add-to-wishlist");
+  if (wishlistButton) {
+    wishlistButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      addToWishlist();
+    });
   }
 
-  // Add event listener for wishlist button
-  const wishlistButton = document.getElementById("wishlist-button");
-  if (wishlistButton) {
-    wishlistButton.addEventListener("click", addToWishlist);
-  }
-  
   // Add event listener for cart button
-  const cartButton = document.getElementById("cart-button");
-  if (cartButton) {
-    cartButton.addEventListener("click", addToCart);
-  }
+  
 });

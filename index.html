@@ -1,187 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YouFashion</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouFashion | Ecommerce Website</title>
+    
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,200&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    
 </head>
-<body class="bg-gray-100">
-  <!-- Navbar -->
-  <nav class="bg-white shadow-lg">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="flex justify-between items-center h-16">
-        <!-- Logo -->
-        <a href="#" class="flex items-center">
-          <span class="font-semibold text-gray-700 text-2xl">YouFashion</span>
-        </a>
 
-        <!-- Nav Links -->
-        <div class="hidden md:flex items-center space-x-4">
-          <a href="index.html" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Home</a>
-          <a href="cart.html" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Cart</a>
-          <a href="wishlist.html" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Wishlist</a>
+<body>
+
+
+    <!-- <div class="header"> -->
+        <div class="container">
+
+            <div class="navbar">
+                <div class="logo">
+                    <h2 style="font-size: 20px; font-weight: bold;">YouFashion</h2>
+                </div>
+                <nav>
+                    <ul id="menuItems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="profile.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="cart.html"><img src="images/cart.png" alt="cart" width="30px" height="30px"></a>
+                <img src="images/menu.png" class="menu-icon" onclick="menutoggle()" >
+            </div>
         </div>
 
-        <!-- Authenticated/Unauthenticated Links -->
-        <div class="hidden md:flex items-center space-x-4">
-          <div id="authenticated" class="hidden">
-            <a href="profile.html" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Profile</a>
-            <button onclick="handleLogout()" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Logout</button>
-          </div>
-          <div id="unauthenticated" class="hidden flex space-x-4">
-            <a href="login.html" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Login</a>
-            <a href="registration.html" class="bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300 font-medium">Register</a>
+        <!-- <div class="row">
+            <div class="col-2">
+                <h1>Give Your Workout <br>A New Style</h1>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus, deserunt?</p>
+                <a href="" class="btn">Explore Now &#8594;</a>
+            </div>
+            <div class="col-2">
+                <img src="images/men-1.png" alt="">
+            </div>
+        </div> -->
+
+        <section class="hero-section">
+            <!-- Bootstrap Carousel -->
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <!-- Slide 1 -->
+                    <div class="carousel-item active">
+                        <div class="row w-100 h-screen">
+                            <!-- Text Section (Left) -->
+                            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center p-6 mb-5 h-100">
+                                <h1 class="text-5xl font-bold mb-4 text-dark">Welcome to Trendy Apparel</h1>
+                                <p class="text-xl text-dark">Discover the latest fashion trends, tailored just for you.</p>
+                                <button class="btn btn-primary mt-4 mb-5">Explore Now</button>
+                            </div>
+                            <!-- Image Section (Right) -->
+                            <div class="col-md-6 p-0">
+                                <img src="images/boy-1.jpg" class="d-block w-100 h-100 object-cover" alt="Slide 1">
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Slide 2 -->
+                    <div class="carousel-item">
+                        <div class="row w-100 h-screen">
+                            <!-- Text Section (Left) -->
+                            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center mb-5 p-6">
+                                <h1 class="text-5xl font-bold mb-4 text-dark">Fashion Meets Comfort</h1>
+                                <p class="text-xl text-dark">Look great, feel great. Find your perfect outfit today!</p>
+                                <button class="btn btn-primary mt-4 mb-5">Explore Now</button>
+                            </div>
+                            <!-- Image Section (Right) -->
+                            <div class="col-md-6 p-0">
+                                <img src="images/girly.jpg" class="d-block w-100 h-100 object-cover" alt="Slide 2">
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Slide 3 -->
+                    <div class="carousel-item">
+                        <div class="row w-100 h-screen">
+                            <!-- Text Section (Left) -->
+                            <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-center mb-5 p-6">
+                                <h1 class="text-5xl font-bold mb-4 text-dark">Elevate Your Style</h1>
+                                <p class="text-xl text-dark">Upgrade your wardrobe with our exclusive collections.</p>
+                                <button class="btn btn-primary mt-4 mb-5">Explore Now</button>
+                            </div>
+                            <!-- Image Section (Right) -->
+                            <div class="col-md-6 p-0">
+                                <img src="images/girl-2.jpg" class="d-block w-100 h-100 object-cover" alt="Slide 3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Carousel Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+
+    <!-- </div> -->
+        
+
+    <!-- </div> -->
+
+
+    <!-- Categories -->
+
+    <div class="categories">
+        <div class="small-container">
+
+            <div class="row">
+                <div class="col-3">
+                    <img src="images/category-1.jpg" alt="">
+                </div>
+                <div class="col-3">
+                    <img src="images/category-2.jpg" alt="">
+                </div>
+                <div class="col-3">
+                    <img src="images/category-3.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Featured Products -->
+
+    <div class="small-container">
+        <h2 class="title">Featured Products</h2>
+        <div class="row" id="product-list">
+            
+            
+        </div>
+        <h2 class="title">Latest Products</h2>
+        <div class="row" id="product-list2">
+            
+            
+        </div>
+    </div>
+    <!-- offer -->
+    <!-------- Offer --------->
+    <div class="offer">
+        <div class="small-container">
+          <div class="row">
+            <div class="col-2">
+              <img src="images/exclusive2.png" class="offer-img" alt="" />
+            </div>
+            <div class="col-2">
+              <p>Exclusively available on YouFashion</p>
+              <h1>Royal Fashion Trend</h1>
+              <small
+                >Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Excepturi rerum maiores eveniet minus ut deserunt vitae
+
+              </small><br>
+              <a href="" class="btn">Buy Now &#8594;</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </nav>
 
-  <!-- Hero Section with Full-Screen Bootstrap Carousel -->
-  <section class="hero-section">
-    <!-- Bootstrap Carousel -->
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <!-- Slide 1 -->
-        <div class="carousel-item active">
-          <img src="images/image.jpg" class="d-block w-100 h-screen object-cover" alt="Slide 1">
-          <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50 p-6 rounded-lg">
-            <h1 class="text-5xl font-bold mb-4 text-white">Welcome to YouFashion</h1>
-            <p class="text-xl text-white">Discover the latest trends in fashion and style.</p>
-          </div>
+    <!-- testimonial -->
+    <div class="testimonial" id="about">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <i class="fa fa-quote-left"></i>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <img src="images/user-1.png" alt="">
+                    <h3>Sean Parker</h3>
+                </div>
+                <div class="col-3">
+                    <i class="fa fa-quote-left"></i>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <img src="images/user-2.png" alt="">
+                    <h3>Mike Smith</h3>
+                </div>
+                <div class="col-3">
+                    <i class="fa fa-quote-left"></i>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.</p>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <img src="images/user-3.png" alt="">
+                    <h3>Mabel Joe</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- brands -->
+
+    <div class="brands">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-5">
+                    <img src="images/logo-coca-cola.png" alt="">
+                </div>
+                <div class="col-5">
+                    <img src="images/logo-godrej.png" alt="">
+                </div>
+                <div class="col-5">
+                    <img src="images/logo-oppo.png" alt="">
+                </div>
+                <div class="col-5">
+                    <img src="images/logo-coca-cola.png" alt="">
+                </div>
+                <div class="col-5">
+                    <img src="images/logo-coca-cola.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-10">
+        <!-- Free Shipping -->
+        <div class="bg-white p-6 rounded-lg shadow-md text-center transition-transform transform hover:scale-105 duration-300">
+            <i class="fas fa-shipping-fast text-4xl text-blue-500 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Free Shipping</h3>
+            <p class="text-gray-600">Free Shipping for orders over £130</p>
         </div>
 
-        <!-- Slide 2 -->
-        <div class="carousel-item">
-          <img src="images/image2.jpg" class="d-block w-100 h-screen object-cover" alt="Slide 2">
-          <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50 p-6 rounded-lg">
-            <h1 class="text-5xl font-bold mb-4 text-white">Exclusive Collections</h1>
-            <p class="text-xl text-white">Shop our exclusive collections and stand out.</p>
-          </div>
+        <!-- Money Guarantee -->
+        <div class="bg-white p-6 rounded-lg shadow-md text-center transition-transform transform hover:scale-105 duration-300">
+            <i class="fas fa-hand-holding-usd text-4xl text-green-500 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Money Guarantee</h3>
+            <p class="text-gray-600">Within 30 days for an exchange.</p>
         </div>
 
-        <!-- Slide 3 -->
-        <div class="carousel-item">
-          <img src="images/hero3.jpg" class="d-block w-100 h-screen object-cover" alt="Slide 3">
-          <div class="carousel-caption d-none d-md-block bg-black bg-opacity-50 p-6 rounded-lg">
-            <h1 class="text-5xl font-bold mb-4 text-white">Summer Sale</h1>
-            <p class="text-xl text-white">Get up to 50% off on selected items.</p>
-          </div>
+        <!-- Flexible Payment -->
+        <div class="bg-white p-6 rounded-lg shadow-md text-center transition-transform transform hover:scale-105 duration-300">
+            <i class="fas fa-credit-card text-4xl text-purple-500 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Flexible Payment</h3>
+            <p class="text-gray-600">Pay with Multiple Credit Cards</p>
         </div>
-      </div>
 
-      <!-- Carousel Controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+        <!-- Online Support -->
+        <div class="bg-white p-6 rounded-lg shadow-md text-center transition-transform transform hover:scale-105 duration-300">
+            <i class="fas fa-headset text-4xl text-red-500 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Online Support</h3>
+            <p class="text-gray-600">24 hours a day, 7 days a week</p>
+        </div>
     </div>
-  </section>
 
-  <!-- Product Listing Section -->
-  <section id="products" class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-3xl font-bold text-gray-800 mb-8">Featured Products</h2>
-    <!-- Filter and Sort Options -->
-    <div class="flex flex-wrap gap-4 mb-8">
-      <!-- Size Filter -->
-      <select id="filter-size" class="p-2 border rounded-lg">
-        <option value="">Filter by Size</option>
-        <option value="S">Small</option>
-        <option value="M">Medium</option>
-        <option value="L">Large</option>
-        <option value="XL">Extra Large</option>
-      </select>
-  
-      <!-- Color Filter -->
-      <select id="filter-color" class="p-2 border rounded-lg">
-        <option value="">Filter by Color</option>
-        <option value="Red">Red</option>
-        <option value="Blue">Blue</option>
-        <option value="Green">Green</option>
-        <option value="Yellow">Yellow</option>
-        <option value="Black">Black</option>
-        <option value="White">White</option>
-        <option value="Pink">Pink</option>
-        <option value="Purple">Purple</option>
-        <option value="Orange">Orange</option>
-        <option value="Grey">Grey</option>
-        <option value="Brown">Brown</option>
-        <option value="Gold">Gold</option>
-        <option value="Silver">Silver</option>
-        <option value="Copper">Copper</option>
-        <option value="Rainbow">Rainbow</option>
-        <option value="Transparent">Transparent</option>
-        <option value="Multi-Color">Multi-Color</option>
-      </select>
-  
-      <!-- Sort Options -->
-      <select id="sort-by" class="p-2 border rounded-lg">
-        <option value="">Sort by</option>
-        <option value="price-asc">Price: Low to High</option>
-        <option value="price-desc">Price: High to Low</option>
-        <option value="popularity-asc">Popularity: Low to High</option>
-        <option value="popularity-desc">Popularity: High to Low</option>
-      </select>
-    </div>
-  
-    <!-- Product List -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="product-list">
-      <!-- Product cards will be dynamically inserted here -->
-    </div>
-  </section>
+    <!-- footer -->
 
-  <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-8">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <p>&copy; 2025 YouFashion. All rights reserved.</p>
-    </div>
-  </footer>
+    <footer class="bg-black text-white py-10 px-5" id="contact">
+        <div class="max-w-screen-xl mx-auto flex flex-wrap justify-between space-y-8 sm:space-y-0 sm:flex-row">
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- JavaScript -->
-  <script src="auth.js"></script>
-  <script src="script.js"></script>
-  <script>
-    
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('id');
-    const sendData = { product: productId, user: localStorage.getItem('user_id') };
-    console.log(sendData);
-    
-    async function addToWishlist(productId) {
-      try {
-        const response = await fetch("https://you-fashion-backend.vercel.app/products/wishlist/", {
-          method: "POST",
-          headers: {
-            "Authorization": `Token ${localStorage.getItem("token")}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(sendData),
-        });
-    
-        if (!response.ok) {
-          throw new Error("Failed to add to wishlist");
+            <!-- About Section -->
+            <div class="flex-1 min-w-[200px]">
+                <h2 class="text-2xl font-bold mb-4">YouFashion</h2>
+                <p class="text-sm leading-6 mb-4">Whether you're a trendsetter, a minimalist, or an adventurer at heart, Mixtas has something for everyone. Our diverse range of styles caters to various personas.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white text-lg"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-white text-lg"><i class="fab fa-times"></i></a>
+                    <a href="#" class="text-white text-lg"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white text-lg"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+
+            <!-- About Us Section -->
+            <div class="flex-1 min-w-[200px]">
+                <h3 class="text-xl font-semibold mb-4">About Us</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-sm hover:underline">Our Story</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Mission & Values</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Meet the Team</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Sustainability Efforts</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Brand Partnerships</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Influencer Collaborations</a></li>
+                </ul>
+            </div>
+
+            <!-- Accessibility Section -->
+            <div class="flex-1 min-w-[200px]">
+                <h3 class="text-xl font-semibold mb-4">Accessibility</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-sm hover:underline">Accessibility Statement</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Site Map</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Web Accessibility Options</a></li>
+                    <li><a href="#" class="text-sm hover:underline">ADA Compliance</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Privacy Policy</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <!-- Join Our Community Section -->
+            <div class="flex-1 min-w-[200px]">
+                <h3 class="text-xl font-semibold mb-4">Join Our Community</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-sm hover:underline">VIP Membership</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Loyalty Program</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Customer Reviews</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Style Forums</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Job Openings</a></li>
+                    <li><a href="#" class="text-sm hover:underline">Culture and Values</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter Section -->
+            <div class="flex-1 min-w-[200px]">
+                <h3 class="text-xl font-semibold mb-4">Let’s get in touch</h3>
+                <p class="text-sm mb-4">Sign up for our newsletter and receive 10% off your order.</p>
+                <form class="flex">
+                    <input type="email" placeholder="Enter your email" class="flex-1 p-3 border-none rounded-l-md" />
+                    <button type="submit" class="bg-white text-black p-3 rounded-r-md">→</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-8 border-t border-gray-700 pt-6">
+            <p class="text-sm">© 2024 YouFashion All rights reserved. Designed by Farhana Alam</p>
+            <div class="flex justify-center mt-4 space-x-6">
+                <i class="fab fa-amazon text-2xl"></i>
+                <i class="fab fa-cc-amex text-2xl"></i>
+                <i class="fab fa-cc-paypal text-2xl"></i>
+                <i class="fas fa-money-bill-wave text-2xl"></i>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        var menuItems = document.getElementById("menuItems");
+
+        menuItems.style.maxHeight = "0px";
+
+        function menutoggle() {
+            if (menuItems.style.maxHeight == "0px") {
+                menuItems.style.maxHeight = "200px";
+            } else {
+                menuItems.style.maxHeight = "0px";
+            }
         }
-    
-        alert("Product added to wishlist!");
-        fetchWishlist(); 
-      } catch (error) {
-        console.error("Error adding to wishlist:", error);
-        //alert("Failed to add to wishlist. Please try again.");
-      }
-    }
-
-    
-    
-  </script>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

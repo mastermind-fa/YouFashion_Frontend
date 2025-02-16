@@ -1,17 +1,12 @@
 // Function to fetch products from the API
-async function fetchProducts(color = "", size = "", sortBy = "") {
+async function fetchProducts(sortBy = "") {
   try {
     let url = "https://you-fashion-backend.vercel.app/products/list/";
     const params = new URLSearchParams();
 
-    if (color) {
-      params.append("color", color);
-    }
-    if (size) {
-      params.append("size", size);
-    }
+    
     if (sortBy) {
-      params.append("ordering", sortBy);
+      params.append("ordering", sortBy); // Ensure this matches the API's expected parameter
     }
 
     // Append parameters to the URL
@@ -44,35 +39,96 @@ async function renderProducts(products) {
   // Render each product
   products.forEach((product) => {
     const productCard = `
-      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-        <img src="${product.image}" alt="${
-      product.name
-    }" class="w-full h-48 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">${
-            product.name
-          }</h3>
-          <p class="text-gray-600">${product.description.slice(0,40)}</p>
-          <p class="text-purple-500 font-semibold mt-4">$${product.price}</p>
-          <button onclick="showProductDetails(${
-            product.id
-          })" class="mt-4 bg-purple-500 text-white py-2 px-4 rounded-full hover:bg-purple-600 transition duration-300">View Details</button>
-          ${
-            localStorage.getItem("token")
-              ? `<button onclick="addToWishlist(${product.id})" class="mt-2 bg-gray-500 text-white py-2 px-4 rounded-full hover:bg-gray-600 transition duration-300">Add to Wishlist</button>`
-              : ""
-          }
+      <div class="col-4">
+        <img src="${product.image}" alt="" onclick="showProductDetails(${product.id})">
+        <h4>${product.name}</h4>
+        <div class="rating">
+          ${Array.from({ length: 5 }, (_, i) =>
+            i < product.popularity
+              ? '<i class="fa fa-star"></i>'
+              : '<i class="fa fa-star-o"></i>'
+          ).join("")}
         </div>
+        <p>$${product.price}</p>
       </div>
     `;
     productList.innerHTML += productCard;
   });
 }
 
+async function renderLatestProducts(products) {
+  const productList = document.getElementById("product-list2");
+  productList.innerHTML = ""; // Clear existing products
+
+  if (products.length === 0) {
+    productList.innerHTML = "<p class='text-gray-600'>No products found.</p>";
+    return;
+  }
+
+  // Render each product
+  products.forEach((product) => {
+    const productCard = `
+      <div class="col-4">
+        <img src="${product.image}" alt="" onclick="showProductDetails(${product.id})">
+        <h4>${product.name}</h4>
+        <div class="rating">
+          ${Array.from({ length: 5 }, (_, i) =>
+            i < product.popularity
+              ? '<i class="fa fa-star"></i>'
+              : '<i class="fa fa-star-o"></i>'
+          ).join("")}
+        </div>
+        <p>$${product.price}</p>
+      </div>
+    `;
+    productList.innerHTML += productCard;
+  });
+}
+
+async function renderAllProducts(products) {
+  const productList = document.getElementById("product-list3");
+  productList.innerHTML = ""; // Clear existing products
+
+  if (products.length === 0) {
+    productList.innerHTML = "<p class='text-gray-600'>No products found.</p>";
+    return;
+  }
+
+  // Render each product
+  products.forEach((product) => {
+    const productCard = `
+      <div class="col-4">
+        <img src="${product.image}" alt="" onclick="showProductDetails(${product.id})">
+        <h4>${product.name}</h4>
+        <div class="rating">
+          ${Array.from({ length: 5 }, (_, i) =>
+            i < product.popularity
+              ? '<i class="fa fa-star"></i>'
+              : '<i class="fa fa-star-o"></i>'
+          ).join("")}
+        </div>
+        <p>$${product.price}</p>
+      </div>
+    `;
+    productList.innerHTML += productCard;
+  });
+}
+
+
+
+// Function to initialize the page
+async function initializePage() {
+  const products = await fetchProducts();
+  renderProducts(products);
+  renderLatestProducts(products);
+  renderAllProducts(products);
+}
+
+// Call the initialize function when the page loads
+document.addEventListener("DOMContentLoaded", initializePage);
+
 // Function to handle filtering and sorting
 async function filterAndSortProducts() {
-  const colorFilter = document.getElementById("filter-color").value;
-  const sizeFilter = document.getElementById("filter-size").value;
   const sortBy = document.getElementById("sort-by").value;
 
   let sortParam = "";
@@ -93,11 +149,15 @@ async function filterAndSortProducts() {
       sortParam = "";
   }
 
-  // Fetch products based on filters and sorting
-  const products = await fetchProducts(colorFilter, sizeFilter, sortParam);
+  console.log("Sorting by:", sortParam); // Debugging: Log the sorting parameter
 
-  // Render the filtered and sorted products
-  renderProducts(products);
+  // Fetch products based on sorting
+  const products = await fetchProducts(sortParam);
+
+  console.log("Products fetched:", products); // Debugging: Log the fetched products
+
+  // Render the sorted products
+  renderAllProducts(products);
 }
 
 // Function to show product details
@@ -109,61 +169,22 @@ function showProductDetails(productId) {
 document.addEventListener("DOMContentLoaded", async () => {
   // Fetch and render products on page load
   const products = await fetchProducts();
-  renderProducts(products);
+  // renderProducts(products);
+  renderAllProducts(products);
+  // renderLatestProducts(products);
 
   // Update authentication state
   checkAuthState();
 });
 
-// Add event listeners for filter and sort changes
-document
-  .getElementById("filter-color")
-  .addEventListener("change", filterAndSortProducts);
 
-document
-  .getElementById("filter-size")
-  .addEventListener("change", filterAndSortProducts);
+// Add event listeners for filter and sort changes
+
 
 document
   .getElementById("sort-by")
   .addEventListener("change", filterAndSortProducts);
 
-// async function fetchUserID() {
-//   const token = localStorage.getItem("token");
-//   if (!token) {
-//     console.error("No token found. Redirecting to login...");
-//     //window.location.href = 'login.html'; // Redirect to login if no token
-//     return;
-//   }
 
-//   try {
-//     console.log("Fetching user ID...");
-//     const response = await fetch(
-//       "https://you-fashion-backend.vercel.app/customer/api/user-id/",
-//       {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       }
-//     );
 
-//     console.log("Response status:", response.status);
-//     console.log("Response headers:", response.headers);
 
-//     if (response.ok) {
-//       const data = await response.json();
-//       console.log("Response data:", data);
-//       console.log("User ID:", data.user_id); // Log the user_id from the response
-//       localStorage.setItem("user_id", data.user_id); // Store user_id in localStorage
-//     } else {
-//       console.error("Failed to fetch user ID. Status:", response.status);
-//       const errorText = await response.text();
-//       console.error("Error response:", errorText);
-//     }
-//   } catch (error) {
-//     console.error("Network error:", error);
-//   }
-// }
-
-// Call fetchUserID when the page loads
-//fetchUserID();

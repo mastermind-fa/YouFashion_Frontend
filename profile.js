@@ -26,6 +26,7 @@ async function fetchProfile() {
     displayProfile(data);
   } catch (error) {
     console.error("Error fetching profile data:", error);
+    alert("Failed to fetch profile data. Please try again later.");
     
   }
 }

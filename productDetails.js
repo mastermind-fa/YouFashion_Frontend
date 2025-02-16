@@ -234,7 +234,7 @@ async function addToWishlist() {
     alert("Product added to wishlist!");
   } catch (error) {
     console.error("Fetch Error:", error); // Log fetch error
-    alert(error.message || "Failed to add to wishlist.");
+    // alert(error.message || "Failed to add to wishlist.");
   }
 }
 

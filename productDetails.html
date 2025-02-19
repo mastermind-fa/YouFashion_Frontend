@@ -17,25 +17,42 @@
 
 <body>
     <!-- navbar -->
-    <div class="container">
+    <nav class="flex justify-between items-center py-4 px-6 bg-gray-100 fixed top-0 left-0 w-full z-50">
+        <!-- Logo -->
+        <a href="/index.html" class="text-3xl md:text-4xl font-extrabold tracking-wide text-gray-900">
+            You<span class="text-indigo-600">Fashion</span>
+        </a>
 
-        <div class="navbar">
-            <div class="logo">
-                <h2 style="font-size: 20px; font-weight: bold;">YouFashion</h2>
-            </div>
-            <nav>
-                <ul id="menuItems">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="profile.html">Account</a></li>
-                </ul>
-            </nav>
-            <a href="cart.html"><img src="images/cart.png" alt="cart" width="30px" height="30px"></a>
-            <img src="images/menu.png" class="menu-icon" onclick="menutoggle()" >
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-8">
+            <a href="index.html" class="text-gray-700 text-lg font-medium transition duration-300 hover:text-indigo-600">Home</a>
+            <a href="/products.html" class="text-gray-700 text-lg font-medium transition duration-300 hover:text-indigo-600">Products</a>
+            <a href="#" class="text-gray-700 text-lg font-medium transition duration-300 hover:text-indigo-600">About</a>
+            <a href="#" class="text-gray-700 text-lg font-medium transition duration-300 hover:text-indigo-600">Contact</a>
+            <a href="/profile.html" class="text-gray-700 text-lg font-medium transition duration-300 hover:text-indigo-600">Account</a>
         </div>
-    </div>
+
+        <!-- Shopping Bag Icon -->
+        <div class="">
+            <a href="#" class="text-gray-700 text-2xl transition duration-300 hover:text-indigo-600">
+                <a href="cart.html"><img src="images/cart.png" alt="cart" width="30px" height="30px"></a>
+            </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-btn" class="md:hidden text-3xl text-gray-700">
+            ☰
+        </button>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden absolute top-16 left-0 w-full bg-gray-100 p-6 flex flex-col items-center space-y-4 shadow-lg md:hidden">
+            <a href="index.html" class="text-gray-700 text-lg font-medium transition duration-300 hover:text-indigo-600">Home</a>
+            <a href="products.html" class="text-gray-700 text-lg font-medium transition duration-300 hover:text-indigo-600">Products</a>
+            <a href="#" class="text-gray-700 text-lg font-medium transition duration-300 hover:text-indigo-600">About</a>
+            <a href="#" class="text-gray-700 text-lg font-medium transition duration-300 hover:text-indigo-600">Contact</a>
+            <a href="profile.html" class="text-gray-700 text-lg font-medium transition duration-300 hover:text-indigo-600">Account</a>
+        </div>
+    </nav>
 
 
     <!-- single product details -->
@@ -334,6 +351,14 @@
 
 
 
+    </script>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
     </script>
     <script src="auth.js"></script>
     <script src="productDetails.js"></script>

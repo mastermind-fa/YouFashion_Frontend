@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                       <img src="https://you-fashion-backend.vercel.app${product.image}" alt="${product.name}" class="w-16 h-16 object-cover rounded">
                       <div>
                           <h3 class="text-lg font-semibold">${product.name}</h3>
-                          <p class="text-sm text-gray-600">${product.description}</p>
+                          <p class="text-sm text-gray-600">${product.description.slice(0, 50)}</p>
                           <p class="text-sm font-medium text-gray-800">Quantity: ${order.quantity}</p>
                           <p class="text-sm font-semibold text-blue-600">Price: $${product.price}</p>
                       </div>

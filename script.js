@@ -103,8 +103,8 @@ async function filterAndSortProducts() {
 // Function to initialize product rendering
 async function initProducts() {
   const allProducts = await fetchProducts();
-  renderProducts("product-list", allProducts); // Initially render all products in product-list1
-  renderProducts("product-list2", allProducts); // Initially render all products in product-list2
+  renderProducts("product-list", allProducts.slice(0, 4)); // Initially render all products in product-list1
+  renderProducts("product-list2", allProducts.slice(4, 8)); // Initially render all products in product-list2
   renderProducts("product-list3", allProducts); // Initially render all products in product-list3
 }
 

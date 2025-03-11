@@ -57,7 +57,7 @@ async function fetchRecentMenus() {
 // Fetch Total Orders
 async function fetchTotalOrders() {
   try {
-    const response = await fetch("https://you-fashion-backend.vercel.app/api/admin/orders/", {
+    const response = await fetch("https://you-fashion-backend.vercel.app/order/admin/all", {
         headers: {
             Authorization: `Token ${localStorage.getItem("token")}`,
         }
@@ -104,7 +104,7 @@ function calculateTotalSales(orders) {
 // Fetch Total Sales
 async function fetchTotalSales() {
   try {
-    const response = await fetch("https://you-fashion-backend.vercel.app/api/admin/orders/");
+    const response = await fetch("https://you-fashion-backend.vercel.app/order/admin/all");
     const data = await response.json();
     const totalSales = calculateTotalSales(data); // Calculate total sales
     document.querySelector(".bg-purple-500 h3").textContent = `$${totalSales}`;

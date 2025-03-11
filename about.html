@@ -4,26 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products | YouFashion</title>
-    <title>YouFashion | Ecommerce Website</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <title>YouFashion | Home</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,200&display=swap"
-        rel="stylesheet" />
 
 
 </head>
 
-<body class="bg-gray-100 font-poppins ">
-
+<body class="flex flex-col min-h-screen bg-gray-100 font-poppins">
 
 
     <!-- Navbar Component -->
     <header class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
-                
+        <!-- Top notification bar (optional) -->
+        <div class="bg-blue-600 text-white text-center text-xs md:text-sm py-2 px-4">
+            <p>Free shipping on all orders over $50! Limited time offer.</p>
+        </div>
+
         <!-- Main navbar -->
         <div class="container mx-auto px-4">
             <!-- Desktop & Mobile Navigation -->
@@ -32,93 +30,109 @@
                 <div class="flex items-center">
                     <a href="/index.html" class="text-3xl md:text-4xl font-extrabold tracking-wide text-gray-900">
                         You<span class="text-indigo-600">Fashion</span>
-                      </a>
+                    </a>
                 </div>
-                
+
                 <!-- Desktop Navigation Links - hidden on mobile -->
                 <nav class="hidden lg:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-800 hover:text-blue-600 font-medium transition duration-150 ease-in-out">Home</a>
-                    <a href="products.html" class="text-gray-800 hover:text-blue-600 transition duration-150 ease-in-out">Products</a>
-                    <a href="about.html" class="text-gray-800 hover:text-blue-600 transition duration-150 ease-in-out">About Us</a>
-                    <a href="contact.html" class="text-gray-800 hover:text-blue-600 transition duration-150 ease-in-out">Contact</a>
+                    <a href="index.html"
+                        class="text-gray-800 hover:text-blue-600 font-medium transition duration-150 ease-in-out">Home</a>
+                    <a href="products.html"
+                        class="text-gray-800 hover:text-blue-600 transition duration-150 ease-in-out">Products</a>
+                    <a href="about.html"
+                        class="text-gray-800 hover:text-blue-600 transition duration-150 ease-in-out">About Us</a>
+                    <a href="contact.html"
+                        class="text-gray-800 hover:text-blue-600 transition duration-150 ease-in-out">Contact</a>
                 </nav>
-                
+
                 <!-- Right side icons/buttons -->
                 <div class="flex items-center space-x-4">
                     <!-- Search button -->
                     <button id="search-toggle" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">
                         <i class="fas fa-search text-xl"></i>
                     </button>
-                    
+
                     <!-- Authentication-dependent elements -->
                     <div id="auth-elements-desktop" class="hidden lg:flex items-center space-x-4">
                         <!-- For authenticated users -->
                         <div id="authenticated-elements-desktop" class="hidden items-center space-x-4">
-                            <a href="wishlist.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">
+                            <a href="wishlist.html"
+                                class="text-gray-600 hover:text-blue-600 transition-colors duration-300">
                                 <i class="far fa-heart text-xl"></i>
                             </a>
-                            <a href="cart.html" class="text-gray-600 hover:text-blue-600 transition-colors duration-300 relative">
+                            <a href="cart.html"
+                                class="text-gray-600 hover:text-blue-600 transition-colors duration-300 relative">
                                 <i class="fas fa-shopping-cart text-xl"></i>
-                                <span id="cart-count" class="absolute -top-2 -right-2 bg-blue-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">0</span>
+                                <span id="cart-count"
+                                    class="absolute -top-2 -right-2 bg-blue-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">0</span>
                             </a>
                             <div class="relative" id="profile-dropdown-container">
-                                <button id="profile-dropdown-toggle" class="flex items-center text-gray-600 hover:text-blue-600 focus:outline-none transition-colors duration-300">
-                                    <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden border border-gray-300">
+                                <button id="profile-dropdown-toggle"
+                                    class="flex items-center text-gray-600 hover:text-blue-600 focus:outline-none transition-colors duration-300">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden border border-gray-300">
                                         <i class="fas fa-user text-gray-500"></i>
                                     </div>
                                     <i class="fas fa-chevron-down ml-1 text-xs"></i>
                                 </button>
                                 <!-- Dropdown menu -->
-                                <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 border border-gray-100">
+                                <div id="profile-dropdown"
+                                    class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 border border-gray-100">
                                     <div class="px-4 py-2 border-b border-gray-100">
                                         <p class="text-sm font-medium text-gray-900" id="user-name">John Doe</p>
                                         <p class="text-xs text-gray-500 truncate" id="user-email">john@example.com</p>
                                     </div>
-                                    <a href="profile.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-blue-600">
+                                    <a href="profile.html"
+                                        class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-blue-600">
                                         <i class="fas fa-user mr-2 text-gray-400"></i>My Profile
                                     </a>
-                                    <a href="orders.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-blue-600">
+                                    <a href="orders.html"
+                                        class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-blue-600">
                                         <i class="fas fa-shopping-bag mr-2 text-gray-400"></i>My Orders
                                     </a>
-                                    <a href="wishlist.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-blue-600">
+                                    <a href="wishlist.html"
+                                        class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-blue-600">
                                         <i class="far fa-heart mr-2 text-gray-400"></i>Wishlist
                                     </a>
-                                    <a href="settings.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-blue-600">
-                                        <i class="fas fa-cog mr-2 text-gray-400"></i>Settings
-                                    </a>
+
                                     <div class="border-t border-gray-100 mt-2"></div>
-                                    <button id="logout-button" class="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100">
+                                    <button id="logout-button"
+                                        class="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100">
                                         <i class="fas fa-sign-out-alt mr-2"></i>Logout
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- For unauthenticated users -->
                         <div id="unauthenticated-elements-desktop" class="hidden items-center space-x-4">
-                            <a href="login.html" class="text-gray-800 hover:text-blue-600 font-medium transition">Sign In</a>
-                            <a href="register.html" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition">Register</a>
+                            <a href="login.html" class="text-gray-800 hover:text-blue-600 font-medium transition">Sign
+                                In</a>
+                            <a href="register.html"
+                                class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition">Register</a>
                         </div>
                     </div>
-                    
+
                     <!-- Mobile menu button -->
-                    <button id="mobile-menu-toggle" class="lg:hidden text-gray-600 hover:text-blue-600 focus:outline-none">
+                    <button id="mobile-menu-toggle"
+                        class="lg:hidden text-gray-600 hover:text-blue-600 focus:outline-none">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
-            
+
             <!-- Search bar - hidden by default -->
             <div id="search-bar" class="hidden py-4 transition-all duration-300 ease-in-out">
                 <div class="relative">
-                    <input type="text" placeholder="Search for products..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:outline-none transition">
+                    <input type="text" placeholder="Search for products..."
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:outline-none transition">
                     <button class="absolute right-0 top-0 h-full px-4 text-gray-500 hover:text-blue-600">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
             </div>
         </div>
-        
+
         <!-- Mobile menu - hidden by default -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 transition-all duration-300">
             <div class="container mx-auto px-4 pt-2 pb-4 space-y-3">
@@ -128,13 +142,14 @@
                     <a href="about.html" class="text-gray-800 hover:text-blue-600 py-2 transition">About Us</a>
                     <a href="contact.html" class="text-gray-800 hover:text-blue-600 py-2 transition">Contact</a>
                 </nav>
-                
+
                 <!-- Authentication-dependent mobile elements -->
                 <div id="auth-elements-mobile">
                     <!-- For authenticated users -->
                     <div id="authenticated-elements-mobile" class="hidden border-t border-gray-200 pt-3 space-y-3">
                         <div class="flex items-center py-2">
-                            <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden border border-gray-300 mr-3">
+                            <div
+                                class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden border border-gray-300 mr-3">
                                 <i class="fas fa-user text-gray-500"></i>
                             </div>
                             <div>
@@ -143,35 +158,44 @@
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-2">
-                            <a href="profile.html" class="flex items-center text-gray-800 hover:text-blue-600 py-2 transition">
+                            <a href="profile.html"
+                                class="flex items-center text-gray-800 hover:text-blue-600 py-2 transition">
                                 <i class="fas fa-user mr-2 text-gray-400"></i>My Profile
                             </a>
-                            <a href="orders.html" class="flex items-center text-gray-800 hover:text-blue-600 py-2 transition">
+                            <a href="orders.html"
+                                class="flex items-center text-gray-800 hover:text-blue-600 py-2 transition">
                                 <i class="fas fa-shopping-bag mr-2 text-gray-400"></i>My Orders
                             </a>
-                            <a href="wishlist.html" class="flex items-center text-gray-800 hover:text-blue-600 py-2 transition">
+                            <a href="wishlist.html"
+                                class="flex items-center text-gray-800 hover:text-blue-600 py-2 transition">
                                 <i class="far fa-heart mr-2 text-gray-400"></i>Wishlist
                             </a>
-                            <a href="cart.html" class="flex items-center text-gray-800 hover:text-blue-600 py-2 transition">
+                            <a href="cart.html"
+                                class="flex items-center text-gray-800 hover:text-blue-600 py-2 transition">
                                 <i class="fas fa-shopping-cart mr-2 text-gray-400"></i>Cart
-                                <span id="cart-count-mobile" class="ml-1 bg-blue-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">0</span>
+                                <span id="cart-count-mobile"
+                                    class="ml-1 bg-blue-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">0</span>
                             </a>
-                            <a href="settings.html" class="flex items-center text-gray-800 hover:text-blue-600 py-2 transition">
+                            <a href="settings.html"
+                                class="flex items-center text-gray-800 hover:text-blue-600 py-2 transition">
                                 <i class="fas fa-cog mr-2 text-gray-400"></i>Settings
                             </a>
                         </div>
-                        <button id="logout-button-mobile" class="w-full mt-2 flex items-center justify-center bg-red-50 text-red-600 hover:bg-red-100 font-medium py-2 rounded-lg transition">
+                        <button id="logout-button-mobile"
+                            class="w-full mt-2 flex items-center justify-center bg-red-50 text-red-600 hover:bg-red-100 font-medium py-2 rounded-lg transition">
                             <i class="fas fa-sign-out-alt mr-2"></i>Logout
                         </button>
                     </div>
-                    
+
                     <!-- For unauthenticated users -->
                     <div id="unauthenticated-elements-mobile" class="hidden border-t border-gray-200 pt-3">
                         <div class="grid grid-cols-2 gap-3">
-                            <a href="login.html" class="flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 rounded-lg transition">
+                            <a href="login.html"
+                                class="flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 rounded-lg transition">
                                 Sign In
                             </a>
-                            <a href="register.html" class="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg transition">
+                            <a href="register.html"
+                                class="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg transition">
                                 Register
                             </a>
                         </div>
@@ -184,42 +208,72 @@
 
 
 
+    
 
-
-
-    <div class="container mx-auto px-4 py-8">
-        <!-- Header and Sorting Dropdown -->
-        <div class="flex justify-between items-center mb-8">
-            <h2 class="text-2xl font-bold text-gray-800">All Products</h2>
-            <select id="sort-by" class="p-2 border border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="filterAndSortProducts()">
-                <option value="">Sort by</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-                <option value="popularity-asc">Popularity: Low to High</option>
-                <option value="popularity-desc">Popularity: High to Low</option>
-            </select>
+    <!-- About Section -->
+    <section class="container mx-auto px-6 py-12">
+        <div class="text-center">
+            <h1 class="text-4xl font-bold text-gray-900">About YouFashion - Clothing Store</h1>
+            <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+                Welcome to YouFashion Clothing, your ultimate destination for trendy and high-quality fashion! We
+                believe that style is a statement, and our mission is to bring you the latest fashion at affordable
+                prices. Whether you're looking for casual wear, formal attire, or unique statement pieces, we've got you
+                covered.
+            </p>
         </div>
 
-        <!-- Product Grid -->
-        <div id="product-list3" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Products will be dynamically inserted here -->
+        <!-- Why Choose Us -->
+        <div class="mt-12 grid md:grid-cols-3 gap-8 text-center">
+            <div class="p-6 bg-white shadow-lg rounded-lg">
+                <h3 class="text-xl font-semibold">Trendy Collections</h3>
+                <p class="mt-2 text-gray-600">Stay ahead of fashion trends with our carefully curated collections for
+                    every season.</p>
+            </div>
+            <div class="p-6 bg-white shadow-lg rounded-lg">
+                <h3 class="text-xl font-semibold">Premium Quality</h3>
+                <p class="mt-2 text-gray-600">We ensure top-notch materials and craftsmanship for long-lasting comfort
+                    and elegance.</p>
+            </div>
+            <div class="p-6 bg-white shadow-lg rounded-lg">
+                <h3 class="text-xl font-semibold">Affordable Prices</h3>
+                <p class="mt-2 text-gray-600">Fashion shouldn’t break the bank. Enjoy stylish outfits at budget-friendly
+                    prices.</p>
+            </div>
         </div>
 
-        <!-- Pagination -->
-        <div class="flex justify-center mt-8 space-x-2">
-            <span class="px-4 py-2 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100">1</span>
-            <span class="px-4 py-2 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100">2</span>
-            <span class="px-4 py-2 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100">3</span>
-            <span class="px-4 py-2 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100">4</span>
-            <span class="px-4 py-2 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-100">&rarr;</span>
+        <!-- Our Stores -->
+        <div class="mt-12">
+            <h2 class="text-3xl font-bold text-center">Our Stores</h2>
+            <div class="mt-6 grid md:grid-cols-2 gap-8">
+                <div class="p-6 bg-white shadow-lg rounded-lg">
+                    <h4 class="text-xl font-semibold">Dhanmondi</h4>
+                    <p class="mt-2 text-gray-600">Road 27, Dhanmondi, Dhaka - 1209</p>
+                </div>
+                <div class="p-6 bg-white shadow-lg rounded-lg">
+                    <h4 class="text-xl font-semibold">Banani</h4>
+                    <p class="mt-2 text-gray-600">Block C, Banani, Dhaka - 1213</p>
+                </div>
+                <div class="p-6 bg-white shadow-lg rounded-lg">
+                    <h4 class="text-xl font-semibold">Uttara</h4>
+                    <p class="mt-2 text-gray-600">Sector 4, Uttara, Dhaka - 1230</p>
+                </div>
+                <div class="p-6 bg-white shadow-lg rounded-lg">
+                    <h4 class="text-xl font-semibold">Gulshan</h4>
+                    <p class="mt-2 text-gray-600">Gulshan Avenue, Dhaka - 1212</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
 
 
-    <!-- footer -->
 
-    <footer class="bg-black text-white py-10 px-5">
+
+
+
+
+
+    <footer class="bg-black text-white py-10 px-5" id="contact">
         <div class="max-w-screen-xl mx-auto flex flex-wrap justify-between space-y-8 sm:space-y-0 sm:flex-row">
 
             <!-- About Section -->
@@ -297,10 +351,7 @@
         </div>
     </footer>
 
-
     <script src="navbar.js"></script>
-    <script src="script.js"></script>
-    
 
 </body>
 

@@ -88,6 +88,7 @@ async function handleRegistration(event) {
         localStorage.setItem("user_id", data.user_id);
         localStorage.setItem("username", data.username);
         localStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("isAdmin", "true");
 
         alert("Login successful!");
         window.location.href = "index.html";

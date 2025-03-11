@@ -4,7 +4,7 @@ async function fetchProducts(sortBy = "") {
     let url = "https://you-fashion-backend.vercel.app/products/list/";
     const params = new URLSearchParams();
 
-    
+    // Add sorting parameter if provided
     if (sortBy) {
       params.append("ordering", sortBy); // Ensure this matches the API's expected parameter
     }
@@ -18,116 +18,56 @@ async function fetchProducts(sortBy = "") {
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
-    const data = await response.json();
-    return data; // Assuming the API returns an array of products
+    const products = await response.json();
+    return products; // Assuming the API returns a JSON list of products
   } catch (error) {
     console.error("Error fetching products:", error);
-    return []; // Return an empty array in case of an error
+    return []; // Return an empty array on error
   }
 }
 
-// Function to render products
-async function renderProducts(products) {
-  const productList = document.getElementById("product-list");
+// Function to render products dynamically
+async function renderProducts(containerId, products) {
+  const productList = document.getElementById(containerId);
   productList.innerHTML = ""; // Clear existing products
 
   if (products.length === 0) {
-    productList.innerHTML = "<p class='text-gray-600'>No products found.</p>";
+    productList.innerHTML =
+      "<p class='text-gray-600 text-center'>No products found.</p>";
     return;
   }
 
-  // Render each product
+  // Render each product dynamically
   products.forEach((product) => {
     const productCard = `
-      <div class="col-4">
-        <img src="${product.image}" alt="" onclick="showProductDetails(${product.id})">
-        <h4>${product.name}</h4>
-        <div class="rating">
-          ${Array.from({ length: 5 }, (_, i) =>
-            i < product.popularity
-              ? '<i class="fa fa-star"></i>'
-              : '<i class="fa fa-star-o"></i>'
-          ).join("")}
-        </div>
-        <p>$${product.price}</p>
-      </div>
-    `;
+          <div class="p-2 transition-transform transform hover:-translate-y-2">
+              <img src="${
+                product.image
+              }" alt="" class="w-full h-64 object-cover rounded-md cursor-pointer" onclick="showProductDetails(${
+      product.id
+    })">
+              <h4 class="text-gray-700 mt-3 text-lg">${product.name}</h4>
+              <div class="flex mt-2">
+                  ${Array.from({ length: 5 }, (_, i) =>
+                    i < product.popularity
+                      ? '<i class="fa fa-star text-red-500"></i>'
+                      : '<i class="fa fa-star-o text-gray-400"></i>'
+                  ).join("")}
+              </div>
+              <p class="text-gray-600 text-lg mt-2 font-semibold">$${
+                product.price
+              }</p>
+          </div>
+      `;
     productList.innerHTML += productCard;
   });
 }
-
-async function renderLatestProducts(products) {
-  const productList = document.getElementById("product-list2");
-  productList.innerHTML = ""; // Clear existing products
-
-  if (products.length === 0) {
-    productList.innerHTML = "<p class='text-gray-600'>No products found.</p>";
-    return;
-  }
-
-  // Render each product
-  products.forEach((product) => {
-    const productCard = `
-      <div class="col-4">
-        <img src="${product.image}" alt="" onclick="showProductDetails(${product.id})">
-        <h4>${product.name}</h4>
-        <div class="rating">
-          ${Array.from({ length: 5 }, (_, i) =>
-            i < product.popularity
-              ? '<i class="fa fa-star"></i>'
-              : '<i class="fa fa-star-o"></i>'
-          ).join("")}
-        </div>
-        <p>$${product.price}</p>
-      </div>
-    `;
-    productList.innerHTML += productCard;
-  });
+function showProductDetails(productId) {
+  window.location.href = `productDetails.html?id=${productId}`;
 }
+// Function to show product details
 
-async function renderAllProducts(products) {
-  const productList = document.getElementById("product-list3");
-  productList.innerHTML = ""; // Clear existing products
-
-  if (products.length === 0) {
-    productList.innerHTML = "<p class='text-gray-600'>No products found.</p>";
-    return;
-  }
-
-  // Render each product
-  products.forEach((product) => {
-    const productCard = `
-      <div class="col-4">
-        <img src="${product.image}" alt="" onclick="showProductDetails(${product.id})">
-        <h4>${product.name}</h4>
-        <div class="rating">
-          ${Array.from({ length: 5 }, (_, i) =>
-            i < product.popularity
-              ? '<i class="fa fa-star"></i>'
-              : '<i class="fa fa-star-o"></i>'
-          ).join("")}
-        </div>
-        <p>$${product.price}</p>
-      </div>
-    `;
-    productList.innerHTML += productCard;
-  });
-}
-
-
-
-// Function to initialize the page
-async function initializePage() {
-  const products = await fetchProducts();
-  renderProducts(products);
-  renderLatestProducts(products);
-  renderAllProducts(products);
-}
-
-// Call the initialize function when the page loads
-document.addEventListener("DOMContentLoaded", initializePage);
-
-// Function to handle filtering and sorting
+// Function to filter and sort products
 async function filterAndSortProducts() {
   const sortBy = document.getElementById("sort-by").value;
 
@@ -156,35 +96,17 @@ async function filterAndSortProducts() {
 
   console.log("Products fetched:", products); // Debugging: Log the fetched products
 
-  // Render the sorted products
-  renderAllProducts(products);
+  // Render the sorted products in product-list3
+  renderProducts("product-list3", products);
 }
 
-// Function to show product details
-function showProductDetails(productId) {
-  window.location.href = `productDetails.html?id=${productId}`;
+// Function to initialize product rendering
+async function initProducts() {
+  const allProducts = await fetchProducts();
+  renderProducts("product-list", allProducts); // Initially render all products in product-list1
+  renderProducts("product-list2", allProducts); // Initially render all products in product-list2
+  renderProducts("product-list3", allProducts); // Initially render all products in product-list3
 }
 
-// Initialize
-document.addEventListener("DOMContentLoaded", async () => {
-  // Fetch and render products on page load
-  const products = await fetchProducts();
-  // renderProducts(products);
-  renderAllProducts(products);
-  // renderLatestProducts(products);
-
-  // Update authentication state
-  checkAuthState();
-});
-
-
-// Add event listeners for filter and sort changes
-
-
-document
-  .getElementById("sort-by")
-  .addEventListener("change", filterAndSortProducts);
-
-
-
-
+// Call the function to load products when the page loads
+document.addEventListener("DOMContentLoaded", initProducts);

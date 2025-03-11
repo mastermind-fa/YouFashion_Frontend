@@ -4,19 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart | YouFashion</title>
-    <title>YouFashion | Cart</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <title>YouFashion - My Orders</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .loader {
+            border-top-color: #3498db;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+
+        @-webkit-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spinner {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .order-card {
+            transition: all 0.3s ease;
+        }
+
+        .order-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100 font-poppins">
-
-
-
+<body class="bg-gray-50 font-poppins text-gray-800">
+    <!-- Navbar Component -->
     <header class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">     <!-- Top notification bar (optional) -->
         <div class="bg-blue-600 text-white text-center text-xs md:text-sm py-2 px-4">
             <p>Free shipping on all orders over $50! Limited time offer.</p>
@@ -208,65 +238,51 @@
         </div>
     </header>
 
-
-
-    <!-- cart items details -->
-
-    <div class="container mx-auto p-4">
-        <h1 class="text-3xl font-bold text-center my-6">Your Cart</h1>
-
-        <div class="overflow-x-auto">
-            <table class="w-full bg-white shadow-lg rounded-lg">
-                <thead class="bg-blue-500 text-white">
-                    <tr>
-                        <th class="p-4 text-left">Product</th>
-                        <th class="p-4">Quantity</th>
-                        <th class="p-4">Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody id="cart-items">
-                    <!-- Cart Items will be dynamically inserted here -->
-                </tbody>
-            </table>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">My Orders</h1>
+            <a href="products.html"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition flex items-center gap-2">
+                <i class="fas fa-shopping-bag"></i>
+                Continue Shopping
+            </a>
         </div>
 
-        <div class="mt-6 text-right">
-            <p class="text-lg"><strong>Subtotal:</strong> $<span id="subtotal">0.00</span></p>
-            <p class="text-lg"><strong>Tax:</strong> $<span id="tax">0.00</span></p>
-            <p class="text-xl font-bold"><strong>Total:</strong> $<span id="total">0.00</span></p>
-        </div>
+        <!-- Orders Container -->
+        <div id="orders-container" class="space-y-6">
+            <!-- Loading State -->
+            <div id="loading" class="flex justify-center items-center h-64">
+                <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+            </div>
 
-        <div class="flex justify-between mt-6">
-            <!-- Action Buttons -->
-            <div class="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden text-center py-16">
+                <i class="fas fa-shopping-bag text-5xl text-gray-300 mb-4"></i>
+                <h2 class="text-2xl font-medium text-gray-600 mb-2">No orders yet</h2>
+                <p class="text-gray-500 mb-8">Start shopping and your orders will appear here!</p>
                 <a href="products.html"
-                    class="w-full sm:w-auto bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-3 px-6 rounded-lg transition flex items-center justify-center gap-2 btn-hover-effect">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>Continue Shopping</span>
-                </a>
-                <a href="checkout.html"
-                    class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition flex items-center justify-center gap-2 btn-hover-effect">
-                    <span>Proceed to Checkout</span>
-                    <i class="fas fa-arrow-right"></i>
+                    class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition">
+                    Browse Products
                 </a>
             </div>
+
+            <!-- Orders List -->
+            <div id="orders-list" class="hidden space-y-6">
+                <!-- Orders will be dynamically inserted here -->
+            </div>
         </div>
-    </div>
+    </main>
 
-
-    
-
-
-
-    <!-- footer -->
-
-    <footer class="bg-black text-white py-10 px-5">
+    <!-- Footer -->
+    <footer class="bg-black text-white py-10 px-5" id="contact">
         <div class="max-w-screen-xl mx-auto flex flex-wrap justify-between space-y-8 sm:space-y-0 sm:flex-row">
 
             <!-- About Section -->
             <div class="flex-1 min-w-[200px]">
                 <h2 class="text-2xl font-bold mb-4">YouFashion</h2>
-                <p class="text-sm leading-6 mb-4">Whether you're a trendsetter, a minimalist, or an adventurer at heart, Mixtas has something for everyone. Our diverse range of styles caters to various personas.</p>
+                <p class="text-sm leading-6 mb-4">Whether you're a trendsetter, a minimalist, or an adventurer at heart,
+                    Mixtas has something for everyone. Our diverse range of styles caters to various personas.</p>
                 <div class="flex space-x-4">
                     <a href="#" class="text-white text-lg"><i class="fab fa-facebook"></i></a>
                     <a href="#" class="text-white text-lg"><i class="fab fa-times"></i></a>
@@ -337,9 +353,152 @@
         </div>
     </footer>
 
-    
+    <!-- Scripts -->
     <script src="navbar.js"></script>
-    <script src="Cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const ordersContainer = document.getElementById('orders-container');
+            const loadingElement = document.getElementById('loading');
+            const emptyState = document.getElementById('empty-state');
+            const ordersList = document.getElementById('orders-list');
+
+            async function fetchOrders() {
+                try {
+                    const token = localStorage.getItem('token');
+                    if (!token) {
+                        window.location.href = 'login.html';
+                        return;
+                    }
+
+                    const response = await fetch('https://you-fashion-backend.vercel.app/order/orders/', {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Token ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch orders');
+                    }
+
+                    const orders = await response.json();
+
+                    // Hide loading state
+                    loadingElement.classList.add('hidden');
+
+                    if (orders.length === 0) {
+                        emptyState.classList.remove('hidden');
+                        return;
+                    }
+
+                    // Show orders list and render orders
+                    ordersList.classList.remove('hidden');
+                    renderOrders(orders);
+
+                } catch (error) {
+                    console.error('Error fetching orders:', error);
+                    loadingElement.classList.add('hidden');
+                    showError('Failed to load orders. Please try again later.');
+                }
+            }
+
+            function renderOrders(orders) {
+                ordersList.innerHTML = orders.map(order => `
+                    <div class="order-card bg-white rounded-lg shadow-sm overflow-hidden">
+                        <div class="p-6">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-24 h-24 rounded-lg overflow-hidden">
+                                        <img src="https://you-fashion-backend.vercel.app${order.product.image}" 
+                                             alt="${order.product.name}" 
+                                             class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-800">${order.product.name}</h3>
+                                        <p class="text-gray-600">Size: ${order.product.size} | Color: ${order.product.color}</p>
+                                        <p class="text-gray-500 text-sm">Order ID: #${order.id}</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-end">
+                                    <p class="text-lg font-semibold text-gray-800">$${order.total_price}</p>
+                                    <p class="text-sm text-gray-500">${formatDate(order.ordered_at)}</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-gray-100">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-sm text-gray-600">Quantity:</span>
+                                    <span class="font-medium">${order.quantity}</span>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button onclick="handleReorder(${order.product.id})" 
+                                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition flex items-center gap-2">
+                                        <i class="fas fa-redo-alt"></i>
+                                        Reorder
+                                    </button>
+                                    <a href="productDetails.html?id=${order.product.id}" 
+                                       class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition flex items-center gap-2">
+                                        <i class="fas fa-eye"></i>
+                                        View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            function formatDate(dateString) {
+                const options = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
+                return new Date(dateString).toLocaleDateString('en-US', options);
+            }
+
+            function showError(message) {
+                ordersList.innerHTML = `
+                    <div class="bg-red-50 text-red-600 p-4 rounded-lg">
+                        <p>${message}</p>
+                    </div>
+                `;
+                ordersList.classList.remove('hidden');
+            }
+
+            // Handle reorder functionality
+            window.handleReorder = async function (productId) {
+                try {
+                    const token = localStorage.getItem('token');
+                    const response = await fetch('https://you-fashion-backend.vercel.app/order/cart/', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Token ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            product_id: productId,
+                            quantity: 1
+                        })
+                    });
+
+                    if (response.ok) {
+                        window.location.href = 'cart.html';
+                    } else {
+                        throw new Error('Failed to add item to cart');
+                    }
+                } catch (error) {
+                    console.error('Error reordering:', error);
+                    alert('Failed to reorder item. Please try again.');
+                }
+            }
+
+            // Initial fetch
+            fetchOrders();
+        });
+    </script>
 </body>
 
 </html>

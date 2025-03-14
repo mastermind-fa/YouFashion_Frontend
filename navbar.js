@@ -227,3 +227,146 @@ logoutButtonMobile.addEventListener("click", handleLogout);
 document.addEventListener("DOMContentLoaded", () => {
   updateAuthUI(checkAuthState());
 });
+
+// Get search elements
+const searchForm = document.querySelector("#search-bar");
+const searchInput = document.querySelector("#search-bar input");
+const searchButton = document.querySelector("#search-bar button");
+
+// Handle search submission
+searchForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const searchQuery = searchInput.value.trim();
+
+  if (searchQuery) {
+    performSearch(searchQuery);
+  }
+});
+
+// Search button click handler
+searchButton.addEventListener("click", function () {
+  const searchQuery = searchInput.value.trim();
+
+  if (searchQuery) {
+    performSearch(searchQuery);
+  }
+});
+
+// Function to perform search
+async function performSearch(query) {
+  try {
+    // Show loading state
+    document.body.style.cursor = "wait";
+
+    // Fetch search results from API
+    const response = await fetch(
+      `https://you-fashion-backend.vercel.app/products/list/?search=${encodeURIComponent(query)}`
+    );
+    const products = await response.json();
+
+    // Create search results modal
+    showSearchResults(products, query);
+  } catch (error) {
+    console.error("Search error:", error);
+    showSearchResults([], query); // Show empty results on error
+  } finally {
+    document.body.style.cursor = "default";
+  }
+}
+
+// Function to display search results
+function showSearchResults(products, query) {
+  // Remove existing modal if any
+  const existingModal = document.getElementById("search-results-modal");
+  if (existingModal) {
+    existingModal.remove();
+  }
+
+  // Create modal container
+  const modal = document.createElement("div");
+  modal.id = "search-results-modal";
+  modal.className =
+    "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+
+  // Create modal content
+  let modalContent = `
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl mx-4 overflow-hidden">
+      <div class="flex justify-between items-center p-5 border-b">
+        <h3 class="text-lg font-semibold text-gray-800">Search Results for "${query}"</h3>
+        <button id="close-search-modal" class="text-gray-400 hover:text-gray-600">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="p-6">
+  `;
+
+  // Add products or "no results" message
+  if (products.length > 0) {
+    modalContent += `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">`;
+    products.forEach((product) => {
+      modalContent += `
+        <div class="bg-white rounded-lg shadow hover:shadow-md transition-shadow duration-300">
+          <a href="productDetails.html?id=${product.id}">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover rounded-t-lg">
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-800">${product.name}</h3>
+              <p class="text-gray-600">${product.color}, ${product.size}</p>
+              <div class="mt-2 flex justify-between items-center">
+                <span class="font-bold text-gray-900">$${product.price}</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      `;
+    });
+    modalContent += `</div>`;
+  } else {
+    modalContent += `
+      <div class="text-center py-8">
+        <i class="fas fa-search text-4xl text-gray-300 mb-4"></i>
+        <p class="text-gray-500 text-lg">No products found matching "${query}"</p>
+        <p class="text-gray-400 mt-2">Try different keywords or browse our categories</p>
+      </div>
+    `;
+  }
+
+  modalContent += `
+      </div>
+      <div class="bg-gray-50 px-4 py-3 flex justify-end">
+        <button id="browse-all-products" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          Browse All Products
+        </button>
+      </div>
+    </div>
+  `;
+
+  // Add content to modal
+  modal.innerHTML = modalContent;
+
+  // Add modal to document
+  document.body.appendChild(modal);
+
+  // Add event listeners
+  document
+    .getElementById("close-search-modal")
+    .addEventListener("click", () => {
+      modal.remove();
+    });
+
+  document
+    .getElementById("browse-all-products")
+    .addEventListener("click", () => {
+      window.location.href = "products.html";
+    });
+
+  // Close on outside click
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.remove();
+    }
+  });
+
+  // Clear search input
+  searchInput.value = "";
+  searchBar.classList.add("hidden");
+}
